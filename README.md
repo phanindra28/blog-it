@@ -1,12 +1,46 @@
-# React + Vite
+# BlogIt
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BlogIt is a modern blogging platform built with React and Firebase, designed for fast, interactive, and secure blog creation and sharing.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User authentication (Firebase)
+- Create, edit, and delete blog posts
+- Responsive UI with Vite and React
+- Loading indicators and smooth navigation
+- Modular component structure
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- Firebase
+- CSS Modules
+
+## Getting Started
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Configure Firebase:**
+   - Update `src/config/firebase.js` with your Firebase project credentials.
+
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+## Project Structure
+
+- `src/components/` – Reusable UI components
+- `src/pages/` – Page-level components (Home, Blog, CreateBlog, Login, etc.)
+- `src/config/` – Firebase configuration
+- `src/hooks/` – Custom React hooks
+- `src/routes/` – App routing
