@@ -1,0 +1,66 @@
+.login-page {
+  margin-inline: 30%;
+  @media only screen and (max-width: 1024px) and (min-width: 769px) {
+    margin-inline: 20%;
+  }
+  @media only screen and (max-width: 768px) {
+    margin-inline: 10%;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+.login-container {
+  border: 1px solid #ccc;
+  border-radius: 32px;
+  padding: 0.25rem;
+  background-color: #e8edf5;
+  display: flex;
+
+  .item {
+    width: 50%;
+    padding: 1rem;
+    cursor: pointer;
+    text-align: center;
+    color: #4a739c;
+  }
+  .active {
+    border: 1px solid #ccc;
+    border-radius: 32px;
+    background-color: #fff;
+    color: #0d141c;
+  }
+}
+.login-form {
+  padding: 2rem 0.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  input {
+    padding: 0.75rem 0.5rem;
+  }
+  label {
+    padding-top: 14px;
+  }
+  .error {
+    color: #d32f2f;
+    font-size: 12px;
+  }
+  .submit {
+    grid-column: 1 / span 2;
+    text-align: center;
+    padding-block: 1rem;
+    button {
+      padding: 0.75rem 5rem;
+      border-radius: 8px;
+      background-color: #434243;
+      color: #fff;
+      cursor: pointer;
+      &:disabled {
+        cursor: not-allowed;
+        background-color: #ccc;
+      }
+    }
+  }
+}

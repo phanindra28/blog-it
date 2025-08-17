@@ -1,0 +1,13 @@
+.app-header {
+  a {
+    text-decoration: none;
+    color: #000;
+    padding: 0.5rem;
+  }
+  button {
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem;
+  }
+}
