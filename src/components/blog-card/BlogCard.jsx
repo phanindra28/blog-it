@@ -4,10 +4,21 @@ import Arrow from "../../assets/icons/arrow-right.svg";
 import "./BlogCard.css";
 export default function BlogCard(props) {
   const { title, body, views, likes, id } = props;
+  const decode = (str) => {
+    try {
+      return decodeURIComponent(atob(str));
+    } catch (err) {
+      console.log(err);
+      return str;
+    }
+  };
   return (
     <div className={"blog-card"}>
       <h2 className={"title"}>{title}</h2>
-      <div className={"body"}>{body}</div>
+      <div
+        className={"body"}
+        dangerouslySetInnerHTML={{ __html: decode(body) }}
+      />
       <div>
         <span className={"meta-data"}>
           <img src={Like} alt={"like"} />

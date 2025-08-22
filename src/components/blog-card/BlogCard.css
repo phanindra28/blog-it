@@ -16,13 +16,16 @@
     max-width: 100%;
     white-space: normal;
     -webkit-line-clamp: 7;
+    *:first-child {
+      margin-top: 0;
+    }
   }
   .title {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-wrap: nowrap;
-    /*--webkit-line-clamp: 1;*/
+    margin-bottom: 0;
   }
   .meta-data {
     display: inline-flex;

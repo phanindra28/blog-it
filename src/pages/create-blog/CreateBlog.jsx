@@ -2,6 +2,7 @@ import "./CreateBlog.css";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useOutletContext } from "react-router";
+import Editor from "../../components/editor/Editor.jsx";
 export default function CreateBlog() {
   const { currentUser } = useOutletContext();
   if (!currentUser) {
@@ -27,7 +28,7 @@ export default function CreateBlog() {
             ).toString();
             await setDoc(doc(db, "blogs", customId), {
               title,
-              body: content,
+              body: btoa(encodeURIComponent(content)),
               email: currentUser.email,
               likes: 0,
               views: 0,
@@ -46,12 +47,9 @@ export default function CreateBlog() {
         />
 
         <label htmlFor={"title"}>Content:</label>
-        <textarea
-          className={"title"}
-          name={"content"}
-          placeholder={"Add Title"}
-          rows={20}
-        />
+        <div className={"editor"}>
+          <Editor name={"content"} />
+        </div>
         <div className={"submit"}>
           <button type={"submit"}>Submit</button>
         </div>
