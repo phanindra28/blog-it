@@ -2,6 +2,12 @@
   width: 80%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 3rem;
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (min-width: 72rem) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

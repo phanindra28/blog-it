@@ -3,6 +3,7 @@ import "./Blog.css";
 import moment from "moment";
 import Icon from "../../assets/icons/eye.svg";
 import Like from "../../assets/icons/like.svg";
+import { decode } from "../../utils/utils.js";
 export default function Blog() {
   const { title, likes, body, views, username, createdAt } = useLoaderData();
   if (!title) {
@@ -49,10 +50,10 @@ export default function Blog() {
           </div>
         </div>
       </div>
-      <div className={"content"}>{body}</div>
-      {/*<h1>Blog</h1>*/}
-      {/*<div><img src={Icon} alt={"eye"}/>*/}
-      {/*    <img src={Like} alt={"like"} style={{color: "red"}}/></div>*/}
+      <div
+        className={"content"}
+        dangerouslySetInnerHTML={{ __html: decode(body) }}
+      />
     </div>
   );
 }
