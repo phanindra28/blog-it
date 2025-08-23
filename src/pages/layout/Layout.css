@@ -10,6 +10,10 @@
     border: none;
     padding: 0.5rem;
   }
+  .login {
+    display: inline-block;
+    height: 38px;
+  }
 }
 body {
   /*background-image: url('../../assets/background-image.png');*/

@@ -28,7 +28,9 @@ export default function Layout() {
             <a href={"/"}>Home</a>
           </li>
           <li>
-            <a href={"/login"}>Login/SignUp</a>
+            <a href={"/login"} className={"login"}>
+              Login/SignUp
+            </a>
           </li>
         </ul>
       );
