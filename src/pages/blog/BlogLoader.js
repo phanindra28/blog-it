@@ -38,6 +38,7 @@ export default async function BlogLoader({ params }) {
 
     return {
       ...data,
+      id,
       username,
     };
   } catch (e) {

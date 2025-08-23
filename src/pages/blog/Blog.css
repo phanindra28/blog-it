@@ -26,6 +26,11 @@
     @media screen and (min-width: 768px) {
       flex-direction: row;
     }
+    .icon {
+      display: inline-flex;
+      padding-right: 1rem;
+      align-items: center;
+    }
   }
   .content {
     padding: 1rem;

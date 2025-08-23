@@ -18,3 +18,15 @@
   color: #999;
   text-transform: uppercase;
 }
+.ql-toolbar.ql-snow {
+  border: 2px solid rgb(229, 231, 231);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: white;
+}
+.ql-container.ql-snow {
+  border: 2px solid rgb(229, 231, 231);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: white;
+}

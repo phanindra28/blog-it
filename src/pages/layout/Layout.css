@@ -11,3 +11,8 @@
     padding: 0.5rem;
   }
 }
+body {
+  /*background-image: url('../../assets/background-image.png');*/
+  /*background-repeat: repeat;*/
+  background-color: #f9f6f1;
+}

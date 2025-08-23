@@ -7,6 +7,8 @@
   border-radius: 16px;
   padding: 0 1rem 1rem;
   box-sizing: border-box;
+  box-shadow: 0 0 10px #ccc;
+  background-color: #f9f9f9;
   .body {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -15,9 +17,9 @@
     -webkit-box-orient: vertical;
     max-width: 100%;
     white-space: normal;
-    -webkit-line-clamp: 7;
+    -webkit-line-clamp: 6;
     *:first-child {
-      margin-top: 0;
+      margin-top: 8px;
     }
   }
   .title {
@@ -26,6 +28,7 @@
     text-overflow: ellipsis;
     text-wrap: nowrap;
     margin-bottom: 0;
+    border-bottom: 1px solid #ccc;
   }
   .meta-data {
     display: inline-flex;

@@ -1,6 +1,6 @@
 .home {
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 1rem;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 3rem;

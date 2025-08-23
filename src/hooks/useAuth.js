@@ -1,11 +1,11 @@
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-// import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export const useAuth = () => {
@@ -13,27 +13,27 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     return onAuthStateChanged(auth, (currentUser) => {
-      // let username = "";
-      // if (currentUser) {
-      //   const userQuery = query(
-      //     collection(db, "users"),
-      //     where("email", "==", currentUser.email),
-      //   );
-      //   getDocs(userQuery)
-      //     .then((userSnapshot) => {
-      //       if (!userSnapshot.empty) {
-      //         const { username: name } = userSnapshot.docs[0].data();
-      //         username = name;
-      //         setUser({ ...currentUser, username });
-      //       }
-      //     })
-      //     .catch((userError) => {
-      //       console.error("Error fetching user:", userError);
-      //       setUser(currentUser);
-      //     });
-      // } else {
-      setUser(currentUser);
-      // }
+      let username = "";
+      if (currentUser) {
+        const userQuery = query(
+          collection(db, "users"),
+          where("email", "==", currentUser.email),
+        );
+        getDocs(userQuery)
+          .then((userSnapshot) => {
+            if (!userSnapshot.empty) {
+              const { username: name } = userSnapshot.docs[0].data();
+              username = name;
+              setUser({ ...currentUser, username });
+            }
+          })
+          .catch((userError) => {
+            console.error("Error fetching user:", userError);
+            setUser(currentUser);
+          });
+      } else {
+        setUser(currentUser);
+      }
       setLoading(false);
     });
   }, []);
@@ -52,5 +52,6 @@ export const useAuth = () => {
     logOut,
     user,
     loading,
+    setLoading,
   };
 };

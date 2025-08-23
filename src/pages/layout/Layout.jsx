@@ -4,7 +4,7 @@ import "./Layout.css";
 import Loader from "../../components/loader/Loader.jsx";
 
 export default function Layout() {
-  const { signIn, signUp, logOut, user, loading } = useAuth();
+  const { signIn, signUp, logOut, user, loading, setLoading } = useAuth();
   const getLinks = () => {
     if (user) {
       return (
@@ -35,7 +35,7 @@ export default function Layout() {
     }
   };
   return (
-    <div>
+    <div className={"main-content"}>
       <Loader isLoading={loading} />
       <header className={"app-header"}>
         <h2>BlogIt</h2>
@@ -47,6 +47,7 @@ export default function Layout() {
           signUp,
           logOut,
           loading,
+          setLoading,
           currentUser: user,
         }}
       />
