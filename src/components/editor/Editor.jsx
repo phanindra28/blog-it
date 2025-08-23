@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ReactQuillWrapper from "./ReactQuillWrapper.jsx";
 
-function Editor({ readOnly = false, onChange = () => {}, name = "" }) {
-  const [value, setValue] = useState(""); // State to hold editor content
-
+function Editor({
+  readOnly = false,
+  onChange = () => {},
+  name = "",
+  value = "",
+  setValue = () => {},
+}) {
   return (
     <div>
       <ReactQuill

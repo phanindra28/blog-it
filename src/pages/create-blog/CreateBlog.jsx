@@ -3,7 +3,9 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useOutletContext } from "react-router";
 import Editor from "../../components/editor/Editor.jsx";
+import { useState } from "react";
 export default function CreateBlog() {
+  const [content, setContent] = useState("");
   const { currentUser } = useOutletContext();
   if (!currentUser) {
     return (
@@ -26,14 +28,20 @@ export default function CreateBlog() {
             const customId = Math.floor(
               100000 + Math.random() * 900000,
             ).toString();
-            await setDoc(doc(db, "blogs", customId), {
-              title,
-              body: btoa(encodeURIComponent(content)),
-              email: currentUser.email,
-              likes: 0,
-              views: 0,
-              createdAt: new Date(),
-            });
+            try {
+              await setDoc(doc(db, "blogs", customId), {
+                title,
+                body: btoa(encodeURIComponent(content)),
+                email: currentUser.email,
+                likes: 0,
+                views: 0,
+                createdAt: new Date(),
+              });
+              form.reset();
+              setContent("");
+            } catch (e) {
+              console.log(e);
+            }
           }
         }}
         className={"form-container"}
@@ -48,7 +56,7 @@ export default function CreateBlog() {
 
         <label htmlFor={"title"}>Content:</label>
         <div className={"editor"}>
-          <Editor name={"content"} />
+          <Editor value={content} setValue={setContent} name={"content"} />
         </div>
         <div className={"submit"}>
           <button type={"submit"}>Submit</button>

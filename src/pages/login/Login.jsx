@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
-import { validateEmail, validatePassword } from "./utils";
+import { validateEmail, validatePassword, validateUsername } from "./utils";
 import { useNavigate, useOutletContext } from "react-router";
+import {
+  doc,
+  setDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../../config/firebase.js";
 
 export function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -9,6 +18,7 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [username, setUserName] = useState("");
   const [isValidForm, setIsValidForm] = useState(false);
 
   const { signIn, signUp, currentUser } = useOutletContext();
@@ -27,6 +37,7 @@ export function Login() {
       : password && rePassword
         ? password === rePassword
         : true;
+    const isValidUsername = validateUsername(username);
     setErrors({
       email: isValidEmail
         ? Boolean(email)
@@ -36,6 +47,11 @@ export function Login() {
         : isValidPassword
           ? Boolean(password)
           : "Password must be at least 6 characters long and contain at least 1 number and 1 letter",
+      username: isLogin
+        ? false
+        : isValidUsername
+          ? Boolean(username)
+          : "Username must be at least 3 characters long and can contain alphanumeric characters",
       rePassword: isValidRePassword
         ? Boolean(rePassword && password)
         : "Passwords do not match",
@@ -44,12 +60,12 @@ export function Login() {
       Boolean(
         email &&
           password &&
-          (isLogin ? true : rePassword && isValidPassword) &&
+          (isLogin ? true : rePassword && isValidPassword && isValidUsername) &&
           isValidEmail &&
           isValidRePassword,
       ),
     );
-  }, [email, password, rePassword, isLogin]);
+  }, [email, password, rePassword, isLogin, username]);
   if (currentUser) {
     return <div className={"blog not-found"}>You are already logged In.</div>;
   }
@@ -90,7 +106,26 @@ export function Login() {
                   console.log(err);
                 });
             } else {
+              const usersRef = collection(db, "users");
+              const q = query(usersRef, where("username", "==", username));
+              const querySnapshot = await getDocs(q);
+              if (!querySnapshot.empty) {
+                setErrors((prev) => ({
+                  ...prev,
+                  username: "Username already taken",
+                }));
+                return;
+              }
               signUp(email, password)
+                .then(() => {
+                  const customId = Math.floor(
+                    100000 + Math.random() * 900000,
+                  ).toString();
+                  return setDoc(doc(db, "users", customId), {
+                    email,
+                    username,
+                  });
+                })
                 .then(() => {
                   navigate("/");
                 })
@@ -98,15 +133,33 @@ export function Login() {
                   console.log(err);
                 });
             }
+            setEmail("");
+            setPassword("");
+            setRePassword("");
+            setUserName("");
           } catch (e) {
             console.error(e);
           }
-
-          setEmail("");
-          setPassword("");
-          setRePassword("");
         }}
       >
+        {!isLogin && (
+          <>
+            <label htmlFor={"email"}>Enter Username:</label>
+            <div>
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                autoComplete={"off"}
+                name={"username"}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+              {errors.username && (
+                <div className={"error"}>{errors.username}</div>
+              )}
+            </div>
+          </>
+        )}
         <label htmlFor={"email"}>Enter Email:</label>
         <div>
           <input

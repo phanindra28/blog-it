@@ -53,3 +53,7 @@
     margin-inline: 0.5rem;
   }
 }
+button,
+a {
+  cursor: pointer;
+}

@@ -7,6 +7,7 @@ export const validateEmail = (email) => {
   }
   return true;
 };
+
 export const validatePassword = (password) => {
   if (password) {
     if (password.length < 6) {
@@ -14,6 +15,20 @@ export const validatePassword = (password) => {
     }
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
     if (!passwordRegex.test(password)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const validateUsername = (username) => {
+  if (username) {
+    if (username.length < 3) {
+      return false;
+    }
+
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
+    if (!usernameRegex.test(username)) {
       return false;
     }
   }
